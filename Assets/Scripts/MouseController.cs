@@ -14,7 +14,9 @@ public class MouseController : MonoBehaviour
 
     //Should probably be in turn manager
     public IEnumerator DodgeCoroutine(Attack attack, Character target) {
-        if(attack.owner.hostile){
+        if(attack.owner.hostile && attack.accuracy > target.Dodge){
+            target.ApplyAttack(attack, false);
+        } else if(attack.owner.hostile){
             //Enable dodge UI here
             character = target;
             CombatUI.ui.SetCharacter(character);
@@ -29,7 +31,6 @@ public class MouseController : MonoBehaviour
             //Disbale dodge UI here
             intent.gameObject.SetActive(false);
         } else {
-            intent.ActivateDodgeIntent(target, attack);
             if(target.dodge > attack.accuracy){
                 //Get Valid Tiles (Could do this manually for each direction for better performance)
                 GridMap.map.CalculateDistances(target.x, target.y);
@@ -47,8 +48,6 @@ public class MouseController : MonoBehaviour
             } else {
                 target.ApplyAttack(attack, false);
             }
-            yield return new WaitForSeconds(1.0f);
-            intent.gameObject.SetActive(false);
         }
     }
 

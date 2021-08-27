@@ -13,7 +13,36 @@ public class Character : MonoBehaviour, IMoveable {
     //Rpg Stats
     public int dodgeMax = 10;
     public int dodge = 10;
+
+    public int Dodge {
+        get {
+            return dodge;
+        }
+        set {
+            TextCallout.NewCallout(transform.position, $"{-(dodge - value)} Dodge");
+            dodge = Mathf.Clamp(value, 0, int.MaxValue);
+        }
+    }
     public int health = 10;
+
+    public int Health {
+        get {
+            return health;
+        } set {
+            TextCallout.NewCallout(transform.position, $"{-(health - value)} Health");
+            health = Mathf.Clamp(value, 0, int.MaxValue);
+            if(health == 0 && !hostile){
+                TurnManager.manager.playerParty.Remove(this);
+                Destroy(ui.uiPanel);
+                Destroy(gameObject);
+            } else if(health == 0){
+                var indexOf =  TurnManager.manager.enemies.IndexOf(this);
+                TurnManager.manager.enemies.Remove(this);
+                TurnManager.manager.enemyAgents.RemoveAt(indexOf);
+                Destroy(gameObject);
+            }
+        }
+    }
 
     public int armor = 1;
 
@@ -23,7 +52,14 @@ public class Character : MonoBehaviour, IMoveable {
     private bool _action = true;
     
     //This really needs a rework, once some game logic has been figured out
-    public bool Action { get; set; }
+    [SerializeField]
+    public bool Action { 
+        get{
+            return _action;
+        } 
+        set{
+            _action = value;
+        }}
 
     public int movementRange = 5;
     public int movementRangeCurrent = 5;
@@ -127,10 +163,10 @@ public class Character : MonoBehaviour, IMoveable {
         }
 
         if(attack.keywords.Contains(WeaponKeywordEnum.Recoil)){
-            if(dodge - 2 < 0){
+            if(Dodge - 2 < 0){
                 attack.accuracy = Mathf.Max(attack.accuracy - 2, 0); //reduce accuracy to a minimum of 0
             } else {
-                dodge = Mathf.Max(dodge - 2, 0);
+                Dodge = Mathf.Max(Dodge - 2, 0);
             }
         }
 
@@ -161,13 +197,13 @@ public class Character : MonoBehaviour, IMoveable {
             onAttackApplied(attack, dodged);
         }
         if(dodged){
-            dodge -= attack.accuracy;
+            Dodge -= attack.accuracy;
         } else {
             if(attack.keywords.Contains(WeaponKeywordEnum.ShallowDamage) && armor > 0){
                 attack.damage /= 2;
             }
             attack.damage -= armor;
-            health -= attack.damage;
+            Health -= attack.damage;
             if(attack.keywords.Contains(WeaponKeywordEnum.Powerful)){
                 Vector3 direction = GridMap.map.grid[x, y].transform.position - GridMap.map.grid[attack.owner.x, attack.owner.y].transform.position;
                 direction.Normalize();
@@ -207,6 +243,7 @@ public class Character : MonoBehaviour, IMoveable {
 
     public void Reload(){
         Action = false;
+
         weapon.shotsCurrent = weapon.shotsMax;
         if(onAction != null){
             onAction(ActionEnum.Reload);
@@ -217,7 +254,7 @@ public class Character : MonoBehaviour, IMoveable {
     }
 
     public void Hunker(){
-        dodge = 0;
+        Dodge = 0;
         Action = false;
         print("Hunkering down");
         if(onAction != null){
@@ -230,7 +267,7 @@ public class Character : MonoBehaviour, IMoveable {
         dodgeRefresh = (actionType) => {
             if(actionType == ActionEnum.Refresh){
                 print("Hunker down completed");
-                dodge = dodgeMax;
+                Dodge = dodgeMax;
                 onAction -= dodgeRefresh;
             }
         };

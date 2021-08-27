@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CombatUI : MonoBehaviour
 {
     public static CombatUI ui;
+    public Canvas canvas;
     public Text characterName;
     public Text dodgeText;
     public Text armorText;

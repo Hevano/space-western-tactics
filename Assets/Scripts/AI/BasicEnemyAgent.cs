@@ -200,7 +200,7 @@ public class AggressiveMovementSequence : SequenceNode {
 
 
 public class FindClosestEnemyNode : Node {
-
+    
     public FindClosestEnemyNode(AIAgent agent) : base(agent){
     }
 
@@ -208,7 +208,10 @@ public class FindClosestEnemyNode : Node {
         if(TurnManager.manager.playerParty.Count == 0) return NodeState.FAILURE;
         List<GridTile> possibilities = new List<GridTile>();
         foreach(Character c in TurnManager.manager.playerParty){
-            possibilities.AddRange(GridMap.map.GetAdjacent(c.x, c.y, (g)=>{ return g.Character == null; }));
+            var list = GridMap.map.GetAdjacent(c.x, c.y, (g)=>{ return g.Character == null; });
+            if(list != null){
+                possibilities.AddRange(list);
+            }
         }
         if(possibilities.Count == 0) return NodeState.FAILURE;
         List<GridTile> path = GridMap.map.GetPath(possibilities[0].x, possibilities[0].y);
@@ -267,13 +270,13 @@ public class AttackRandomNode : Node {
         }
         if(targets.Count == 0) return NodeState.FAILURE;
         var target = targets[Random.Range(0, targets.Count)];
-        agent.character.Attack(target);
         Character.AttackAppliedHandler attackHandler = null;
         attackHandler = (a, dodged)=>{
             agent.character.Action = false;
             target.onAttackApplied -= attackHandler;
         };
         target.onAttackApplied += attackHandler;
+        agent.character.Attack(target);
         return NodeState.RUNNING;
     }
 }
