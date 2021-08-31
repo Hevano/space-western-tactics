@@ -1,41 +1,44 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Animations;
 
 //Should break this into an enemy and a player class
 public class Character : MonoBehaviour, IMoveable {
-    public static float CHARACTER_MOVEMENT_SPEED = 0.1f; //Should probably scale based on length of the move
+    public static float CHARACTER_MOVEMENT_SPEED = 0.2f; //Should probably scale based on length of the move
     
     public bool hostile = false;
     public int x;
     public int y;
+    
+    public CharacterData data = new CharacterData();
 
-    //Rpg Stats
-    public int dodgeMax = 10;
-    public int dodge = 10;
-
+    //TODO: Have these properties call statchanged events with a specific stat enum;
     public int Dodge {
         get {
-            return dodge;
+            return data.dodge;
         }
         set {
-            TextCallout.NewCallout(transform.position, $"{-(dodge - value)} Dodge");
-            dodge = Mathf.Clamp(value, 0, int.MaxValue);
+            string msg = value != int.MaxValue ? $"{-(data.dodge- value)} Dodge" : "Restored Dodge";
+            TextCallout.NewCallout(transform.position, msg);
+            data.dodge = Mathf.Clamp(value, 0, data.dodgeMax);
         }
     }
-    public int health = 10;
 
     public int Health {
         get {
-            return health;
-        } set {
-            TextCallout.NewCallout(transform.position, $"{-(health - value)} Health");
-            health = Mathf.Clamp(value, 0, int.MaxValue);
-            if(health == 0 && !hostile){
+            return data.health;
+        } 
+        set {
+            string msg = value != int.MaxValue ? $"{-(data.health - value)} Health" : "Restored Health";
+            TextCallout.NewCallout(transform.position, msg);
+            data.health = Mathf.Clamp(value, 0, data.healthMax);
+            if(data.health == 0 && !hostile){
                 TurnManager.manager.playerParty.Remove(this);
                 Destroy(ui.uiPanel);
                 Destroy(gameObject);
-            } else if(health == 0){
+            } else if(data.health == 0){
                 var indexOf =  TurnManager.manager.enemies.IndexOf(this);
                 TurnManager.manager.enemies.Remove(this);
                 TurnManager.manager.enemyAgents.RemoveAt(indexOf);
@@ -44,28 +47,46 @@ public class Character : MonoBehaviour, IMoveable {
         }
     }
 
-    public int armor = 1;
+    public int Armor{
+        get{
+            return data.armor;
+        }
+        set{
+            string msg = value != int.MaxValue ? $"{-(data.armor - value)} Armor" : "Restored Armor";
+            TextCallout.NewCallout(transform.position, msg);
+            data.armor = Mathf.Clamp(value, 0, data.armorMax);
+        }
+    }
 
-    public WeaponData weapon;
-    
-    [SerializeField]
-    private bool _action = true;
-    
-    //This really needs a rework, once some game logic has been figured out
-    [SerializeField]
+    public int MovementRange{
+        get{
+            return data.movementRange;
+        }
+        set{
+            string msg = value != int.MaxValue ? $"{-(data.movementRange - value)} Movement" : "Restored Movement";
+            TextCallout.NewCallout(transform.position, msg);
+            data.movementRange = Mathf.Clamp(value, 0, data.movementRange);
+        }
+    }
+
     public bool Action { 
         get{
-            return _action;
+            return data.action;
         } 
         set{
-            _action = value;
+            data.action = value;
         }}
 
-    public int movementRange = 5;
-    public int movementRangeCurrent = 5;
+    public WeaponData weapon;
+
+    public Transform rightHandTarget;
+    public Transform leftHandTarget;
 
     //UI Display
     public CharacterUI ui;
+
+    //Animation
+    public Animator anim;
 
     //Character events
     public delegate void MoveHandler(int newX, int newY);
@@ -98,8 +119,8 @@ public class Character : MonoBehaviour, IMoveable {
             print("Cannot move, path is not valid");
             return false;
         }
-        if(!MouseController.controller.dodging && (list == null || list.Count - 1 > movementRangeCurrent)){ //Jank code, refactor(?)
-            print($"{gameObject.name} cannot move {list.Count} tiles. {movementRangeCurrent} movement remaining.");
+        if(!MouseController.controller.dodging && (list == null || list.Count - 1 > MovementRange)){ //Jank code, refactor(?)
+            print($"{gameObject.name} cannot move {list.Count} tiles. {MovementRange} movement remaining.");
             return false;
         }
         path = new List<Vector3>();
@@ -115,14 +136,14 @@ public class Character : MonoBehaviour, IMoveable {
         y = list[path.Count - 1].y;
         list[path.Count - 1].Character = this;
 
-        
+        anim.SetBool("Moving", true);
 
         return true;
     }
 
     public bool MoveAction(int endX, int endY){
         if(Move(endX, endY)){
-            movementRangeCurrent -= path.Count - 1;
+            MovementRange -= path.Count - 1;
             GridMap.map.CalculateDistances(x, y, this.MovementDisplay);
 
             if(onStatChange != null){
@@ -141,6 +162,9 @@ public class Character : MonoBehaviour, IMoveable {
                 }
                 if(path.Count == 0){
                     path = null;
+                    anim.SetBool("Moving", false);
+                } else {
+                   LookTowards(path[0]);
                 }
             }
         
@@ -152,7 +176,7 @@ public class Character : MonoBehaviour, IMoveable {
         Attack attack = (specialAttack != null) ? specialAttack : weapon.GetAttack();
          
         
-        if(attack.keywords.Contains(WeaponKeywordEnum.Heavy) && movementRangeCurrent != movementRange) return;
+        if(attack.keywords.Contains(WeaponKeywordEnum.Heavy) && MovementRange != data.movementRangeMax) return;
 
         if(onAction != null){
             onAction(ActionEnum.Attack);
@@ -171,11 +195,18 @@ public class Character : MonoBehaviour, IMoveable {
         }
 
         if(attack.keywords.Contains(WeaponKeywordEnum.Heavy)){
-            movementRangeCurrent = 0;
+            MovementRange = 0;
         }
 
 
         weapon.shotsCurrent -= 1;
+        AttackAppliedHandler startAttackAnim = null;
+        startAttackAnim = (a, d) => {
+            anim.SetTrigger("Attacking");
+            target.onAttackApplied -= startAttackAnim;
+        };
+        target.onAttackApplied += startAttackAnim;
+        LookTowards(target.transform.position);
         //Attack effects or animation
         target.ReceiveAttack(attack);
 
@@ -198,12 +229,15 @@ public class Character : MonoBehaviour, IMoveable {
         }
         if(dodged){
             Dodge -= attack.accuracy;
+            anim.SetBool("Moving", true);
+            anim.SetBool("Moving", false);
         } else {
-            if(attack.keywords.Contains(WeaponKeywordEnum.ShallowDamage) && armor > 0){
+            if(attack.keywords.Contains(WeaponKeywordEnum.ShallowDamage) && Armor > 0){
                 attack.damage /= 2;
             }
-            attack.damage -= armor;
+            attack.damage -= Armor;
             Health -= attack.damage;
+            anim.SetTrigger("Damage");
             if(attack.keywords.Contains(WeaponKeywordEnum.Powerful)){
                 Vector3 direction = GridMap.map.grid[x, y].transform.position - GridMap.map.grid[attack.owner.x, attack.owner.y].transform.position;
                 direction.Normalize();
@@ -218,7 +252,7 @@ public class Character : MonoBehaviour, IMoveable {
         }
 
         if(attack.keywords.Contains(WeaponKeywordEnum.Collateral)){
-            //Find behind location XD
+            //Find behind location
             Vector3 direction = GridMap.map.grid[x, y].transform.position - GridMap.map.grid[attack.owner.x, attack.owner.y].transform.position;
             direction.Normalize();
             var behind = GridMap.map.GetTilesFromLine(GridMap.map.grid[x, y].transform.position, direction);
@@ -230,7 +264,7 @@ public class Character : MonoBehaviour, IMoveable {
     }
 
     public void NewTurn(){
-        movementRangeCurrent = movementRange;
+        MovementRange = data.movementRangeMax;
         Action = true;
         if(onAction != null){
             onAction(ActionEnum.Refresh);
@@ -256,7 +290,6 @@ public class Character : MonoBehaviour, IMoveable {
     public void Hunker(){
         Dodge = 0;
         Action = false;
-        print("Hunkering down");
         if(onAction != null){
             onAction(ActionEnum.Hunker);
         }
@@ -266,8 +299,7 @@ public class Character : MonoBehaviour, IMoveable {
         ActionHandler dodgeRefresh = null;
         dodgeRefresh = (actionType) => {
             if(actionType == ActionEnum.Refresh){
-                print("Hunker down completed");
-                Dodge = dodgeMax;
+                Dodge = int.MaxValue;
                 onAction -= dodgeRefresh;
             }
         };
@@ -276,7 +308,7 @@ public class Character : MonoBehaviour, IMoveable {
 
     public void MovementDisplay(GridTile t){ //Could this be moved into the mouse controller class, or even the gridmap class?
         var mat = t.gameObject.GetComponent<Renderer>().material;
-        if(!t.blocked && t.visited <= movementRangeCurrent && t.visited != -1){
+        if(!t.blocked && t.visited <= MovementRange && t.visited != -1){
             //mat.SetColor("HighlightColor", Color.green);
             mat.SetFloat("Enabled", 1.0f);
         } else {
@@ -285,12 +317,22 @@ public class Character : MonoBehaviour, IMoveable {
         }
     }
 
+    private void LookTowards(Vector3 pos){
+        //Get location on screen
+        var charPos = Camera.main.WorldToScreenPoint(transform.position);
+        //get location of target on screen
+        var pathPos = Camera.main.WorldToScreenPoint(pos);
+        if(charPos.x < pathPos.x){
+            anim.gameObject.transform.eulerAngles = new Vector3(-20f, 225f, 0f);
+        } else {
+            anim.gameObject.transform.eulerAngles = new Vector3(20f, 45f, 0f);
+
+        }
+    }
+
     private void Start() {
         weapon = WeaponData.GetRandomWeapon();
         weapon.owner = this;
-        if(hostile){
-            weapon.shotsCurrent = 99;
-        }
     }
 
     private void Update() {

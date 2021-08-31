@@ -60,15 +60,15 @@ public class CombatUI : MonoBehaviour
     }
 
     private void updateDodge(bool applied){
-        dodgeText.text = $"Dodge: {selectedCharacter.dodge}";
+        dodgeText.text = $"Dodge: {selectedCharacter.Dodge}";
     }
 
     private void updateArmor(bool applied){
-        armorText.text = $"Armor: {selectedCharacter.armor}";
+        armorText.text = $"Armor: {selectedCharacter.Armor}";
     }
 
     private void updateHealth(bool applied){
-        healthText.text = $"Health: {selectedCharacter.health}";
+        healthText.text = $"Health: {selectedCharacter.Health}";
     }
 
     private void updateShots(bool applied){

@@ -41,7 +41,7 @@ public class CharacterUI : MonoBehaviour
     }
 
     private void UpdateMovement(bool applied){
-        movementText.text = $"movement: {character.movementRangeCurrent} / {character.movementRange}";
+        movementText.text = $"movement: {character.MovementRange} / {character.data.movementRangeMax}";
     }
 
     private void UpdateAction(bool applied){

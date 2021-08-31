@@ -32,7 +32,7 @@ public class HasLowDodgeNode : Node {
     }
 
     public override NodeState Evaluate(){
-        return (character.dodge / character.dodgeMax ) < threshold ? NodeState.SUCCESS : NodeState.FAILURE; 
+        return (character.Dodge / character.data.dodgeMax ) < threshold ? NodeState.SUCCESS : NodeState.FAILURE; 
     }
 }
 
@@ -43,11 +43,11 @@ public class FindCoverNode : Node { //Not written in a very modular way
         //Get all tiles within range
         var options = new List<GridTile>();
         GridMap.OnVisit handler = (GridTile g)=>{
-            if(g.visited <= agent.character.movementRangeCurrent + 1 && g.blocked){
+            if(g.visited <= agent.character.MovementRange + 1 && g.blocked){
                 var adj = GridMap.map.GetAdjacent(g.x, g.y, (adjTile) => {
                     if(adjTile.Character != null) return false;
                     var path = GridMap.map.GetPath(adjTile.x, adjTile.y);
-                    if(path == null || path.Count > agent.character.movementRangeCurrent) return false;
+                    if(path == null || path.Count > agent.character.MovementRange) return false;
                     foreach(Character c in TurnManager.manager.playerParty){
                         if(GridMap.map.CheckLos(c.transform.position, adjTile.transform.position)) return false;
                     }
@@ -100,10 +100,10 @@ public class MoveActionNode : Node {
         GridMap.map.CalculateDistances(character.x, character.y);
         var path = GridMap.map.GetPath(movementTarget.x, movementTarget.y);
         if(path == null) return NodeState.FAILURE;
-        if(path.Count - 1 <= character.movementRangeCurrent){
+        if(path.Count - 1 <= character.MovementRange){
             return character.MoveAction(movementTarget.x, movementTarget.y) ? NodeState.SUCCESS : NodeState.FAILURE;
         } else if(path != null){
-            GridTile withinRangeTile = path[character.movementRangeCurrent];
+            GridTile withinRangeTile = path[character.MovementRange];
             return character.MoveAction(withinRangeTile.x, withinRangeTile.y) ? NodeState.SUCCESS : NodeState.FAILURE;
         } else {
             return NodeState.FAILURE;
@@ -319,7 +319,7 @@ public class HasMovementNode : Node {
     }
 
     public override NodeState Evaluate(){
-        return (character.movementRangeCurrent > threshold) ? NodeState.SUCCESS : NodeState.FAILURE;
+        return (character.MovementRange > threshold) ? NodeState.SUCCESS : NodeState.FAILURE;
     }
 }
 

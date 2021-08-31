@@ -31,7 +31,8 @@ public class MouseController : MonoBehaviour
             //Disbale dodge UI here
             intent.gameObject.SetActive(false);
         } else {
-            if(target.dodge > attack.accuracy){
+            //Include AI Tree for dodging
+            if(target.Dodge > attack.accuracy){
                 //Get Valid Tiles (Could do this manually for each direction for better performance)
                 GridMap.map.CalculateDistances(target.x, target.y);
                 var openings = GridMap.map.GetAdjacent(target.x, target.y, (g) => {return g.Character == null;});
