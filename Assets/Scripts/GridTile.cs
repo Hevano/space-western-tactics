@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HoverableObject))]
+[RequireComponent(typeof(ClickableObject))]
 public class GridTile : MonoBehaviour
 {
     public int x;
@@ -24,5 +24,6 @@ public class GridTile : MonoBehaviour
         //Copy material so each tile can have it's own instance
         var renderer = GetComponent<Renderer>();
         renderer.material = new Material(renderer.material);
+        GetComponent<ClickableObject>().onMouseDown += (button) => { MouseController.controller.GridTileClick(this); };
     }
 }

@@ -6,7 +6,17 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnManager manager;
     public bool turnBased = true;
-    public int turnNum = 1;
+    public int _turnNum = 1;
+    public int TurnNum {
+        get{
+            return _turnNum;
+        } 
+        set{
+            _turnNum = value;
+            CombatUI.SetTurnNum(value);
+        }
+    }
+    
 
     public List<Character> playerParty;
     public List<Character> enemies;
@@ -56,7 +66,7 @@ public class TurnManager : MonoBehaviour
         if(MouseController.controller.character != null){
             GridMap.map.CalculateDistances(MouseController.controller.character.x, MouseController.controller.character.y, MouseController.controller.character.MovementDisplay);
         }
-        while(turnNum % 2 != 0){
+        while(TurnNum % 2 != 0){
             yield return new WaitForFixedUpdate();
         }
     }
@@ -64,44 +74,20 @@ public class TurnManager : MonoBehaviour
         foreach(Character c in enemies){
             c.NewTurn();
         }
-        while(turnNum % 2 == 0){
+        while(TurnNum % 2 == 0){
             foreach(Character c in enemies){
                 var ai = enemyAgents[enemies.IndexOf(c)];
                 while(ai.Evaluate() == NodeState.RUNNING){
                     yield return new WaitForSeconds(1.0f);
                 }
             }
-            turnNum++;
-            // foreach(Character c in enemies){
-            //     GridMap.map.CalculateDistances(c.x, c.y);
-            //     if(GridMap.map.grid[MouseController.controller.character.x, MouseController.controller.character.y].visited < 5){
-            //         Character.AttackAppliedHandler attackHandler = null;
-            //         attackHandler = (a, dodged)=>{
-            //             c.Action = false;
-            //             print("Attack handled");
-            //             MouseController.controller.character.onAttackApplied -= attackHandler;
-            //         };
-            //         MouseController.controller.character.onAttackApplied += attackHandler;
-            //         c.Attack(MouseController.controller.character);
-            //         while(c.Action){
-            //             yield return new WaitForSeconds(1.0f);
-            //         }
-            //     } else {
-            //         var x = MouseController.controller.character.x;
-            //         var y = MouseController.controller.character.y;
-            //         x = Random.Range(Mathf.Clamp(x-5, 0, GridMap.map.columns), Mathf.Clamp(x+5, 0, GridMap.map.columns));
-            //         y = Random.Range(Mathf.Clamp(y-5, 0, GridMap.map.columns), Mathf.Clamp(y+5, 0, GridMap.map.columns));
-            //         c.Move(x,y);
-            //     }
-            //     yield return new WaitForSeconds(1.0f);
-            // }
-            //turnNum++;
+            TurnNum++;
         }
     }
 
     public void EndPlayerTurn(){
-        if(turnNum % 2 != 0){
-            turnNum++;
+        if(TurnNum % 2 != 0){
+            TurnNum++;
         }
     }
 }

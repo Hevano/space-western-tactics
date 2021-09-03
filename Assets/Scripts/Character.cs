@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.Animations;
 
 //Should break this into an enemy and a player class
+[RequireComponent(typeof(ClickableObject))]
+[RequireComponent(typeof(HoverableObject))]
 public class Character : MonoBehaviour, IMoveable {
     public static float CHARACTER_MOVEMENT_SPEED = 0.2f; //Should probably scale based on length of the move
     
@@ -21,7 +23,7 @@ public class Character : MonoBehaviour, IMoveable {
         }
         set {
             string msg = value != int.MaxValue ? $"{-(data.dodge- value)} Dodge" : "Restored Dodge";
-            TextCallout.NewCallout(transform.position, msg);
+            CombatUI.NewCallout(transform.position, msg);
             data.dodge = Mathf.Clamp(value, 0, data.dodgeMax);
         }
     }
@@ -32,7 +34,7 @@ public class Character : MonoBehaviour, IMoveable {
         } 
         set {
             string msg = value != int.MaxValue ? $"{-(data.health - value)} Health" : "Restored Health";
-            TextCallout.NewCallout(transform.position, msg);
+            CombatUI.NewCallout(transform.position, msg);
             data.health = Mathf.Clamp(value, 0, data.healthMax);
             if(data.health == 0 && !hostile){
                 TurnManager.manager.playerParty.Remove(this);
@@ -53,7 +55,7 @@ public class Character : MonoBehaviour, IMoveable {
         }
         set{
             string msg = value != int.MaxValue ? $"{-(data.armor - value)} Armor" : "Restored Armor";
-            TextCallout.NewCallout(transform.position, msg);
+            CombatUI.NewCallout(transform.position, msg);
             data.armor = Mathf.Clamp(value, 0, data.armorMax);
         }
     }
@@ -64,8 +66,8 @@ public class Character : MonoBehaviour, IMoveable {
         }
         set{
             string msg = value != int.MaxValue ? $"{-(data.movementRange - value)} Movement" : "Restored Movement";
-            TextCallout.NewCallout(transform.position, msg);
-            data.movementRange = Mathf.Clamp(value, 0, data.movementRange);
+            CombatUI.NewCallout(transform.position, msg);
+            data.movementRange = Mathf.Clamp(value, 0, data.movementRangeMax);
         }
     }
 
@@ -331,8 +333,11 @@ public class Character : MonoBehaviour, IMoveable {
     }
 
     private void Start() {
-        weapon = WeaponData.GetRandomWeapon();
+        weapon = hostile ? new WeaponData(this, new ValueRange(1, 6), new List<WeaponKeywordEnum>()): WeaponData.GetRandomWeapon();
         weapon.owner = this;
+        GetComponent<ClickableObject>().onMouseDown += (button) => {MouseController.controller.CharacterClick(this, button); };
+        GetComponent<HoverableObject>().onMouseEnter += () => {MouseController.controller.CharacterHoverEnter(this); };
+        GetComponent<HoverableObject>().onMouseExit += () => {MouseController.controller.CharacterHoverExit(this); };
     }
 
     private void Update() {

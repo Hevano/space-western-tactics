@@ -10,18 +10,6 @@ public class TextCallout : MonoBehaviour
     public static GameObject textCalloutPrefab;
 
     public Text text;
-    public static GameObject NewCallout(Vector3 location, string text){
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(location + offset);
-        if(textCalloutPrefab == null){
-            textCalloutPrefab = Resources.Load<GameObject>("prefabs/textCalloutPrefab");
-        }
-        GameObject calloutObj = Instantiate(textCalloutPrefab, screenPos, Quaternion.identity, CombatUI.ui.canvas.transform);
-        calloutObj.transform.SetAsLastSibling();
-        var callout = calloutObj.GetComponent<TextCallout>();
-        callout.SetText(text);
-        return calloutObj;
-    }
-
     public void SetText(string newText){
         text.text = newText;
     }

@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 0742d34452c78a3408c7a55e15355665
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData:
+  - name: InventoryButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 792
+      y: 112
+      width: 221
+      height: 51
+    spriteID: aa88741a7b2a9084eb39c872a2f657dc
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 782, y: -17}
+  - name: ReloadButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 725
+      y: 440
+      width: 221
+      height: 51
+    spriteID: b0aae4d05f5b687459b91d89460a64e3
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 715, y: 371}
+  - name: HunkerButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 528
+      width: 221
+      height: 51
+    spriteID: 1a2460a809cde4d4186e0fd951825242
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -6, y: 519}
+  - name: TurnEndButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 792
+      y: 4
+      width: 220
+      height: 100
+    spriteID: 7270e740e11dfa84e96adfcb67d12e00
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -898, y: -6}
+  - name: TurnNumPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 682
+      y: 212
+      width: 240
+      height: 200
+    spriteID: 539b6e11ffc37564da97905720929fc5
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -998, y: 212}
+  - name: WeaponPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 780
+      height: 200
+    spriteID: 5080a8a1ea738bf488be80c2251f1ba1
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: HealthbarOverlay
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 440
+      width: 360
+      height: 80
+    spriteID: 7ff56793474ece04eb354a05bbc4aadf
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -161, y: -550}
+  - name: DodgebarOverlay
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 372
+      y: 440
+      width: 345
+      height: 50
+    spriteID: 49be6d93d9d69f643ae87074922acb16
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 207, y: -490}
+  - name: CharacterStatPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 212
+      width: 670
+      height: 220
+    spriteID: abaf31c425f59664c8ef21038882ae13
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: -648}
+  rigSpriteImportData:
+  - name: InventoryButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 792
+      y: 112
+      width: 221
+      height: 51
+    spriteID: 57faa5a61f436e444af2c9827f71663a
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 782, y: -17}
+  - name: ReloadButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 725
+      y: 440
+      width: 221
+      height: 51
+    spriteID: aa75bd6d3890a6341ba681032072af7d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 715, y: 371}
+  - name: HunkerButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 528
+      width: 221
+      height: 51
+    spriteID: c7daa60cf7a2fcc4cb5781e2e10f0e02
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -6, y: 519}
+  - name: TurnEndButton
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 792
+      y: 4
+      width: 220
+      height: 100
+    spriteID: ab580e083a245824989e5e91d8474766
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -898, y: -6}
+  - name: TurnNumPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 682
+      y: 212
+      width: 240
+      height: 200
+    spriteID: c42ab591e534e6a4c862d2f8b1dfddc2
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -998, y: 212}
+  - name: WeaponPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 780
+      height: 200
+    spriteID: cd86d7eb5f041004883bbc88be52966a
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+  - name: HealthbarOverlay
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 440
+      width: 360
+      height: 80
+    spriteID: 70dde87f2e2813e479d65183de6ddd2d
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -161, y: -550}
+  - name: DodgebarOverlay
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 372
+      y: 440
+      width: 345
+      height: 50
+    spriteID: 01a2165ee77ca7347a537f04b337310a
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 207, y: -490}
+  - name: CharacterStatPanel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 212
+      width: 670
+      height: 220
+    spriteID: 2a4eaf1b40d031d448947797899110d5
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: -648}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 0
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 1920, y: 1080}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers:
+  - name: InventoryButton
+    spriteName: InventoryButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: aa88741a7b2a9084eb39c872a2f657dc
+    layerID: 0
+    mosaicPosition: {x: 792, y: 112}
+  - name: ReloadButton
+    spriteName: ReloadButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b0aae4d05f5b687459b91d89460a64e3
+    layerID: 1987728919
+    mosaicPosition: {x: 725, y: 440}
+  - name: HunkerButton
+    spriteName: HunkerButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1a2460a809cde4d4186e0fd951825242
+    layerID: -2029820291
+    mosaicPosition: {x: 4, y: 528}
+  - name: TurnEndButton
+    spriteName: TurnEndButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7270e740e11dfa84e96adfcb67d12e00
+    layerID: -728307238
+    mosaicPosition: {x: 792, y: 4}
+  - name: TurnNumPanel
+    spriteName: TurnNumPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 539b6e11ffc37564da97905720929fc5
+    layerID: 1162934625
+    mosaicPosition: {x: 682, y: 212}
+  - name: WeaponPanel
+    spriteName: WeaponPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5080a8a1ea738bf488be80c2251f1ba1
+    layerID: -1999988048
+    mosaicPosition: {x: 4, y: 4}
+  - name: HealthbarOverlay
+    spriteName: HealthbarOverlay
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7ff56793474ece04eb354a05bbc4aadf
+    layerID: -1051788209
+    mosaicPosition: {x: 4, y: 440}
+  - name: DodgebarOverlay
+    spriteName: DodgebarOverlay
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 49be6d93d9d69f643ae87074922acb16
+    layerID: 221894838
+    mosaicPosition: {x: 372, y: 440}
+  - name: CharacterStatPanel
+    spriteName: CharacterStatPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: abaf31c425f59664c8ef21038882ae13
+    layerID: 663059905
+    mosaicPosition: {x: 4, y: 212}
+  rigPSDLayers:
+  - name: InventoryButton
+    spriteName: InventoryButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 57faa5a61f436e444af2c9827f71663a
+    layerID: 0
+    mosaicPosition: {x: 792, y: 112}
+  - name: ReloadButton
+    spriteName: ReloadButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: aa75bd6d3890a6341ba681032072af7d
+    layerID: 1987728919
+    mosaicPosition: {x: 725, y: 440}
+  - name: HunkerButton
+    spriteName: HunkerButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c7daa60cf7a2fcc4cb5781e2e10f0e02
+    layerID: -2029820291
+    mosaicPosition: {x: 4, y: 528}
+  - name: TurnEndButton
+    spriteName: TurnEndButton
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ab580e083a245824989e5e91d8474766
+    layerID: -728307238
+    mosaicPosition: {x: 792, y: 4}
+  - name: TurnNumPanel
+    spriteName: TurnNumPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c42ab591e534e6a4c862d2f8b1dfddc2
+    layerID: 1162934625
+    mosaicPosition: {x: 682, y: 212}
+  - name: WeaponPanel
+    spriteName: WeaponPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cd86d7eb5f041004883bbc88be52966a
+    layerID: -1999988048
+    mosaicPosition: {x: 4, y: 4}
+  - name: HealthbarOverlay
+    spriteName: HealthbarOverlay
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 70dde87f2e2813e479d65183de6ddd2d
+    layerID: -1051788209
+    mosaicPosition: {x: 4, y: 440}
+  - name: DodgebarOverlay
+    spriteName: DodgebarOverlay
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 01a2165ee77ca7347a537f04b337310a
+    layerID: 221894838
+    mosaicPosition: {x: 372, y: 440}
+  - name: CharacterStatPanel
+    spriteName: CharacterStatPanel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2a4eaf1b40d031d448947797899110d5
+    layerID: 663059905
+    mosaicPosition: {x: 4, y: 212}
+  sharedRigPSDLayers: []
+  generateGOHierarchy: 0
+  textureAssetName: CombatUI1630532021 Texture
+  prefabAssetName: CombatUI1630532021 Prefab
+  spriteLibAssetName: CombatUI1630532021 Sprite Lib
+  skeletonAssetName: CombatUI1630532021 Skeleton
+  secondarySpriteTextures: []

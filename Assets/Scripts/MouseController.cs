@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Contains all the click and hover handlers
 public class MouseController : MonoBehaviour
 {
     public static MouseController controller;
@@ -69,59 +70,53 @@ public class MouseController : MonoBehaviour
         }
         controller = this;
     }
-
-    void Update () {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        //Probably better off writing an interface for clickable and hoverable objects, would be cleaner and more extensible
-        if (hit.collider != null) { 
-
-            GridTile tile;
-            Character characterTarget;
-            if(Input.GetMouseButtonDown(0)){ //Mouse down cases
-                if(hit.collider.gameObject.TryGetComponent<GridTile>(out tile)){ //Tile cases
-                    if(dodging){ //Dodging Logic
-                        if(tile.Character == character){
-                            dodging = false;
-                        } else if(!tile.blocked && tile.Character == null && tile.visited == 1){
-                            character.Move(tile.x, tile.y);
-                            dodgeTile = tile;
-                            dodging = false;
-                        }
-                    } else if(character != null && !tile.blocked && tile.Character == null) { //Movement Logic
-                        character.MoveAction(tile.x, tile.y);
-                    }
-
-                } else if (hit.collider.gameObject.TryGetComponent<Character>(out characterTarget)){ //Character Cases
-                    if(dodging && characterTarget == character){
-                        dodging = false;
-                    } else if (!characterTarget.hostile) { //Character selection logic
-                        character = characterTarget;
-                        CombatUI.ui.SetCharacter(character);
-                        GridMap.map.CalculateDistances(character.x, character.y, character.MovementDisplay);
-                    } else if (characterTarget.hostile && character != null && character.Action){ //Attack logic
-                        character.Action = false;
-                        character.Attack(characterTarget);
-                    }
-                }
-
-            } else { //Hover cases
-                if(dodging){
-                    //dodging has no hover behaviour
-                } else if(hit.collider.gameObject.TryGetComponent<GridTile>(out tile)){ //Tile cases
-                    //Implement movement path intents
-                } else if (hit.collider.gameObject.TryGetComponent<Character>(out characterTarget)){ //Character Cases
-                    if(characterTarget.hostile){ //Inefficient
-                        intent.ActivateIntent(characterTarget, character.weapon);
-                        return;
-                    }
-                }
-            }
-
-            if(!dodging && intent.gameObject.activeSelf){
-                intent.gameObject.SetActive(false);
-            }
+    
+    public void GridTileClick(GridTile tile){
+        if(!dodging ){
+            bool moved = character.MoveAction(tile.x, tile.y);
+            //TODO: Effects if move was successful / unsucessful
+        }else if(dodging && tile.Character == character){
+            dodging = false;
+        } else if(dodging && !tile.blocked && tile.Character == null && tile.visited == 1){
+            character.Move(tile.x, tile.y);
+            dodgeTile = tile;
+            dodging = false;
+        } else if(tile.Character != null){
+            CharacterClick(tile.Character, 0);
         }
+    }
+
+    public void CharacterClick(Character c, int button){
+        if(button != 0){
+            return;
+        } else if(dodging){
+            if(c == character){
+                dodging = false;
+            }
+        } else if(!c.hostile){
+            character = c;
+            CombatUI.ui.SetCharacter(character);
+            GridMap.map.CalculateDistances(character.x, character.y, character.MovementDisplay);
+        } else if(character != null && character.Action){
+            character.Action = false;
+            character.Attack(c);
+            //attack should return bool of success, then we can do some feedback based on result
+        }
+    }
+
+    public void CharacterHoverEnter(Character c){
+        if(!dodging && c.hostile){
+            intent.ActivateIntent(c, character.weapon);
+        }
+    }
+
+    public void CharacterHoverExit(Character c){
+        if(!dodging && c.hostile){
+            intent.gameObject.SetActive(false);
+        }
+    }
+
+    private void Update() {
+        if(Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2)) ClickableObject.clicked = false;
     }
 }
