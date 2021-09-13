@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 36
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Weapon
+    m_Hash: 1855955664
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Pistol1
+      m_Hash: 275803395
+      m_Sprite: {fileID: 4792382053149728403, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4792382053149728403, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    - m_Name: Pistol2
+      m_Hash: -1988543303
+      m_Sprite: {fileID: -654702448614043762, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -654702448614043762, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    - m_Name: AR1
+      m_Hash: 1464467721
+      m_Sprite: {fileID: -5193162138853618506, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5193162138853618506, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    - m_Name: AR2
+      m_Hash: -834449229
+      m_Sprite: {fileID: 6733351104203255725, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6733351104203255725, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    - m_Name: Shotgun1
+      m_Hash: -1387663012
+      m_Sprite: {fileID: 2483603000616609969, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2483603000616609969, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    - m_Name: Sniper1
+      m_Hash: 1081730395
+      m_Sprite: {fileID: -7344634037808796185, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7344634037808796185, guid: 71b3ae2d2c645ac4bbcde7e2d24b2de6, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  m_PrimaryLibraryGUID: 

@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: -654702448614043762
     second: weaponSpriteSheet_3
+  - first:
+      213: 2483603000616609969
+    second: weaponSpriteSheet_4
+  - first:
+      213: -7344634037808796185
+    second: weaponSpriteSheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,6 +224,48 @@ TextureImporter:
       bones: []
       spriteID: e8f08cc77970ae6f0800000000000000
       internalID: -654702448614043762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weaponSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 826
+        width: 168
+        height: 39
+      alignment: 9
+      pivot: {x: 0.27089223, y: 0.20911583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b8e8d635c7877220800000000000000
+      internalID: 2483603000616609969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weaponSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 695
+        width: 210
+        height: 54
+      alignment: 9
+      pivot: {x: 0.22410607, y: 0.17737381}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ede923914e921a90800000000000000
+      internalID: -7344634037808796185
       vertices: []
       indices: 
       edges: []

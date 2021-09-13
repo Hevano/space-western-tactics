@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Animations;
+using UnityEngine.U2D.Animation;
 
 //Should break this into an enemy and a player class
 [RequireComponent(typeof(ClickableObject))]
@@ -83,6 +84,8 @@ public class Character : MonoBehaviour, IMoveable {
 
     public Transform rightHandTarget;
     public Transform leftHandTarget;
+
+    public SpriteResolver weaponResolver;
 
     //UI Display
     public CharacterUI ui;
@@ -333,8 +336,9 @@ public class Character : MonoBehaviour, IMoveable {
     }
 
     private void Start() {
-        weapon = hostile ? new WeaponData(this, new ValueRange(1, 6), new List<WeaponKeywordEnum>()): WeaponData.GetRandomWeapon();
+        weapon = hostile ? new WeaponData(this, "Simple Revolver", WeaponSprite.PISTOL2, new ValueRange(1, 6), new List<WeaponKeywordEnum>()): WeaponData.GetRandomWeapon();
         weapon.owner = this;
+        weaponResolver.SetCategoryAndLabel("Weapon", weapon.spriteName);
         GetComponent<ClickableObject>().onMouseDown += (button) => {MouseController.controller.CharacterClick(this, button); };
         GetComponent<HoverableObject>().onMouseEnter += () => {MouseController.controller.CharacterHoverEnter(this); };
         GetComponent<HoverableObject>().onMouseExit += () => {MouseController.controller.CharacterHoverExit(this); };

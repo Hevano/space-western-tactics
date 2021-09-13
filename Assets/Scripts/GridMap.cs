@@ -6,6 +6,8 @@ public class GridMap : MonoBehaviour
 {
     public static GridMap map;
 
+    public static int MODULE_SIZE = 5;
+
     public GridTile[,] grid;
     public int rows;
     public int columns;
@@ -32,7 +34,7 @@ public class GridMap : MonoBehaviour
         CalculateDistances(0, 0);
     }
 
-    private void GenerateGrid(){
+    public void GenerateGrid(){
         grid = new GridTile[rows, columns];
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < columns; j++){
@@ -49,6 +51,33 @@ public class GridMap : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void GenerateGrid(MapModule[,] modules){
+        rows = modules.GetLength(0);
+        columns = modules.GetLength(1);
+        for(int i = 0; i < rows; i++){ //Instantiate Props
+            for(int j = 0; j < columns; j++){
+                GameObject module = Instantiate(modules[j, i].gameObject, new Vector3(gridOrigin.x + (j * scale), 0, gridOrigin.y + (i * scale)), Quaternion.identity);
+            }
+        }
+        rows *= MODULE_SIZE;
+        columns *= MODULE_SIZE;
+        grid = new GridTile[rows, columns];
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                //Get Module coordinates
+                int moduleX = (int) Mathf.Floor(j / MODULE_SIZE);
+                int tileX = j - moduleX * MODULE_SIZE;
+                int moduleY = (int) Mathf.Floor(i / MODULE_SIZE);
+                int tileY = i - moduleY * MODULE_SIZE;
+                GridTile tile = modules[moduleX, moduleY].grid[tileX, tileY];
+                grid[j, i] = tile.GetComponent<GridTile>();
+                grid[j, i].x = j;
+                grid[j, i].y = i;
+            }
+        }
+
     }
 
     private void ClearPathData(int x, int y){

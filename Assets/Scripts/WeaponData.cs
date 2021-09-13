@@ -7,6 +7,10 @@ public class WeaponData {
     public Character owner;
     public ValueRange accuracy;
 
+    public string name;
+
+    public string spriteName;
+
     public int damage;
     public int shotsCurrent;
     public int shotsMax;
@@ -14,8 +18,10 @@ public class WeaponData {
     public int minRange;
     public HashSet<WeaponKeywordEnum> keywords;
 
-    public WeaponData(Character owner, ValueRange accuracy, List<WeaponKeywordEnum> keywords, int damage = 1, int shots = 1, int maxRange = int.MaxValue, int minRange = -1){
+    public WeaponData(Character owner, string name, string spriteName, ValueRange accuracy, List<WeaponKeywordEnum> keywords, int damage = 1, int shots = 1, int maxRange = int.MaxValue, int minRange = -1){
         this.owner = owner;
+        this.name = name;
+        this.spriteName = spriteName;
         this.damage = damage;
         this.accuracy = accuracy;
         this.minRange = minRange;
@@ -58,26 +64,37 @@ public class WeaponData {
                 shots = 1;
                 keywords.Add(WeaponKeywordEnum.Heavy);
                 keywords.Add(WeaponKeywordEnum.Collateral);
-                return new WeaponData(null, accuracy, keywords, damage, shots);
+                return new WeaponData(null, "Barrel 30 Cal", WeaponSprite.SNIPER1, accuracy, keywords, damage, shots);
             case 1: //AR
                 accuracy = new ValueRange(2,6);
                 damage = 3;
                 shots = 5;
                 keywords.Add(WeaponKeywordEnum.Recoil);
-                return new WeaponData(null, accuracy, keywords, damage, shots);
+                return new WeaponData(null, "SCAR-32", WeaponSprite.AR1, accuracy, keywords, damage, shots);
             case 2: //Shotgun
                 accuracy = new ValueRange(1,12);
                 damage = 5;
                 shots = 2;
                 keywords.Add(WeaponKeywordEnum.ShallowDamage);
-                return new WeaponData(null, accuracy, keywords, damage, shots);
+                return new WeaponData(null, "Sawn Off", WeaponSprite.SHOTGUN1, accuracy, keywords, damage, shots);
             default: //Revolver
                 accuracy = new ValueRange(3,4);
                 damage = 2;
                 shots = 6;
-                return new WeaponData(null, accuracy, keywords, damage, shots);
+                return new WeaponData(null, "Hamming Revolver", WeaponSprite.PISTOL1, accuracy, keywords, damage, shots);
         }
     }
+}
+
+public class WeaponSprite {
+    public static string PISTOL1 = "Pistol1";
+    public static string PISTOL2 = "Pistol2";
+    public static string AR1 = "AR1";
+    public static string AR2 = "AR2";
+    public static string SHOTGUN1 = "Shotgun1";
+    public static string SNIPER1 = "Sniper1";
+
+
 }
 
 public class Attack {

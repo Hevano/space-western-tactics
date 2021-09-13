@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.U2D.Animation;
 
 public class CombatUI : MonoBehaviour
 {
     public static CombatUI ui;
     public Canvas canvas;
+    public SpriteLibraryAsset characterAssetLibrary;
     public Text characterName;
     public Text dodgeText;
     public Slider dodgeSlider;
     public Text armorText;
     public Text healthText;
     public Slider healthSlider;
+
+    public Text weaponNameText;
+    public Image weaponSprite;
     public Text accuracyText;
     public Text damageText;
     public Text keywordText;
@@ -41,6 +46,10 @@ public class CombatUI : MonoBehaviour
         }
         selectedCharacter = c;
         characterName.text = selectedCharacter.name;
+        weaponNameText.text = selectedCharacter.weapon.name;
+        weaponSprite.sprite = characterAssetLibrary.GetSprite("Weapon", selectedCharacter.weapon.spriteName);
+        weaponSprite.rectTransform.sizeDelta = new Vector2(weaponSprite.sprite.rect.width, weaponSprite.sprite.rect.height);
+
         updateDodge(true);
         updateArmor(true);
         updateHealth(true);
