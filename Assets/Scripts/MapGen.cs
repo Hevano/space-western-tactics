@@ -111,7 +111,7 @@ public struct MapModuleConnection{
     public int[] offset;
     public bool[] openings;
 
-    public bool completed = false;
+    public bool completed;
 
     public bool CheckConnection(MapModuleConnection other){
         return openings.SequenceEqual(other.openings.Reverse());
